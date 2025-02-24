@@ -19,25 +19,25 @@ pipeline {
             }
         }
 
-        // stage('Update Terraform Variables') {
-        //     steps {
-        //         sh '''
-        //             echo "public_key = \\"$SSH_PUBLIC_KEY\\"" > terraform/terraform.tfvars
-        //         '''
-        //     }
-        // }
+        stage('Update Terraform Variables') {
+            steps {
+                sh '''
+                    echo "public_key = \\"$SSH_PUBLIC_KEY\\"" > terraform/terraform.tfvars
+                '''
+            }
+        }
 
-        // stage('Terraform Init and Apply') {
-        //     steps {
-        //         dir('terraform') {
-        //             sh '''
-        //                 terraform init
-        //                 terraform apply -auto-approve
-        //                 terraform output -json > ../ansible/terraform_output.json
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Terraform Init and Apply') {
+            steps {
+                dir('terraform') {
+                    sh '''
+                        terraform init
+                        terraform apply -auto-approve
+                        terraform output -json > ../ansible/terraform_output.json
+                    '''
+                }
+            }
+        }
 
         stage('Update Ansible Inventory') {
             steps {
