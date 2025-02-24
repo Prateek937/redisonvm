@@ -1,0 +1,40 @@
+---
+- name: Setup Nginx as Redis reverse proxy
+  hosts: redis_server
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Create Nginx configuration for Redis
+      template:
+        dest: /etc/nginx/sites-available/redis
+        content: |
+          server {
+              listen 80;
+              server_name redis.jungleio.com;
+
+              location / {
+                  proxy_pass http://127.0.0.1:6379;
+              }
+          }
+
+    - name: Enable Redis Nginx site
+      file:
+        src: /etc/nginx/sites-available/redis
+        dest: /etc/nginx/sites-enabled/redis
+        state: link
+
+    - name: Remove default Nginx site
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
