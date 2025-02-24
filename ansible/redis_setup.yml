@@ -3,7 +3,8 @@
   hosts: redis_server
   become: yes
   vars:
-    - change_lines_redis:
+    redis_path: "/etc/redis"
+    change_lines_redis:
       - key: "bind 127.0.0.1 -::1"
         value: "#bind 127.0.0.1 -::1"
       - key: "protected-mode yes"
@@ -36,4 +37,4 @@
       service:
         name: redis-server
         state: restarted
-        enabled: yes 
+        enabled: yes
