@@ -4,10 +4,10 @@
   become: yes
   vars:
     - change_lines_redis:
-        - key: "bind 127.0.0.1 -::1"
-          value: "#bind 127.0.0.1 -::1"
-        - key: "protected-mode yes"
-          value: "protected-mode no"
+      - key: "bind 127.0.0.1 -::1"
+        value: "#bind 127.0.0.1 -::1"
+      - key: "protected-mode yes"
+        value: "protected-mode no"
   tasks:
     - name: Update apt cache
       apt:
