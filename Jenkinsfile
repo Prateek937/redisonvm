@@ -14,7 +14,7 @@ pipeline {
                 sh '''
                     mkdir -p ~/.ssh
                     echo "$SSH_PRIVATE_KEY" > ~/.ssh/redis_vm_key
-                    chmod 600 ~/.ssh/redis_vm_key
+                    chmod 400 ~/.ssh/redis_vm_key
                 '''
             }
         }
