@@ -10,7 +10,7 @@
         update_cache: yes
 
     - name: Create Nginx configuration for Redis
-      template:
+      copy:
         dest: /etc/nginx/sites-available/redis
         content: |
           server {
