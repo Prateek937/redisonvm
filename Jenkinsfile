@@ -31,8 +31,8 @@ pipeline {
             steps {
                 dir('terraform') {
                     sh '''
-                        terraform init
-                        terraform apply -auto-approve
+                        // terraform init
+                        // terraform apply -auto-approve
                         terraform output -json > ../ansible/terraform_output.json
                     '''
                 }
