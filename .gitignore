@@ -1,0 +1,5 @@
+Jenkinsfile
+terraform/.terraform/terraform.tfstate
+terraform/.terraform/providers/registry.terraform.io/hashicorp/aws/5.88.0/linux_amd64/LICENSE.txt
+terraform/.terraform/providers/registry.terraform.io/hashicorp/aws/5.88.0/linux_amd64/terraform-provider-aws_v5.88.0_x5
+terraform/.terraform.lock.hcl

@@ -1,0 +1,31 @@
+---
+- name: Install Redis on EC2
+  hosts: redis_server
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Redis
+      apt:
+        name: redis-server
+        state: present
+
+    - name: Configure Redis to accept remote connections
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: '^bind 127\.0\.0\.1'
+        line: 'bind 0.0.0.0'
+
+    - name: Set Redis password
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: '^# requirepass foobared'
+        line: 'requirepass {{ lookup("env", "REDIS_PASSWORD") | default("your_strong_password") }}'
+
+    - name: Restart Redis service
+      service:
+        name: redis-server
+        state: restarted
+        enabled: yes 
