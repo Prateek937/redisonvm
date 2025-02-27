@@ -17,8 +17,8 @@ terraform_apply:
     - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
   script:
     - echo "public_key = \"$SSH_PUBLIC_KEY\"" > terraform.tfvars
-    # - terraform init
-    # - terraform apply -auto-approve
+    - terraform init
+    - terraform apply -auto-approve
     - terraform output -json > ../ansible/terraform_output.json
   artifacts:
     paths:

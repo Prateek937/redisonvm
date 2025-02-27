@@ -36,17 +36,10 @@ resource "aws_security_group" "redis_sg" {
   description = "Security group for Redis server"
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "all"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 6379
-    to_port     = 6379
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Consider restricting this to specific IPs
   }
 
   egress {
